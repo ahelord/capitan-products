@@ -64,7 +64,7 @@ class MagicStoreDatasource {
 
 	async searchProducts() {
 		let currentPage = 1;
-		let perPage = 5;
+		let perPage = 1;
 
 		const agent = new https.Agent({
 			rejectUnauthorized: false
@@ -84,6 +84,7 @@ class MagicStoreDatasource {
 
 		do {
 			console.log('call');
+			console.log('currentPage',currentPage);
 			response = await axios(config);
 			const productsAdapted = [];
 			for (const product of response.data) {
