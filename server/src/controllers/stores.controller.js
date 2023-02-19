@@ -1,17 +1,17 @@
 const httpStatus = require('http-status');
 const {formatError} = require('../utils/format-error.util');
-const CategoriesInteractor = require('../interactors/categories.interactor');
+const StoreInteractor = require('../interactors/stores.interactor');
 
-class CategoriesController {
+class StoresController {
 	constructor() {
 
 
 	}
 
-	async getCategories(req, res, next) {
+	async getSearch(req, res, next) {
 		try{
-			const interactor = new CategoriesInteractor();
-			const response = await interactor.findCategories();
+			const interactor = new StoreInteractor();
+			const response = await interactor.searchProducts();
 			res.json(response);
 		}catch (error) {
 			console.error(error);
@@ -21,5 +21,5 @@ class CategoriesController {
 	}
 }
 
-module.exports = CategoriesController;
+module.exports = StoresController;
 
