@@ -8,7 +8,7 @@ class StoresInteractor {
 
 	async searchProducts() {
 
-		return await this.magicStoreDataSource.searchPaginate();
+		return await this.magicStoreDataSource.searchProducts();
 	}
 }
 
