@@ -32,7 +32,6 @@ class MagicStoreDatasource {
 		do {
 			console.log('call');
 			response = await axios(config);
-
 			products = response.data.concat(products);
 			currentPage += 1;
 			config.url = this.getEndpointUrl(perPage,currentPage);
