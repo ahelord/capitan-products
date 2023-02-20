@@ -12,16 +12,14 @@ module.exports = (sequelize, DataTypes) => {
      */
 		static associate(models) {
 			// define association here
-			models.product.hasMany(models.product, {
-				as: 'variants',
-				foreignKey: 'product_id',
-				sourceKey: 'parent_id',
-				useJunctionTable: false
-			});
+			models.product.hasMany(models.product, {as: 'variants', foreignKey: 'parent_id'});
+
+
 		}
 	}
 	product.init({
 		productId: {
+			defaultValue: DataTypes.UUIDV4,
 			type: DataTypes.UUID,
 			primaryKey: true,
 			field: 'product_id'
@@ -31,12 +29,22 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.UUID,
 			field: 'parent_id'
 		},
+		init:DataTypes.BOOLEAN,
 		externalId:{
 			type: DataTypes.STRING,
 			unique:true,
 			allowNull: false,
 			field: 'external_id'
 		},
+		searchText: {
+			type: DataTypes.STRING,
+			field: 'search_text'
+		},
+		jsonProduct: {
+			type: DataTypes.JSONB,
+			field: 'json_product'
+		},
+
 		name: DataTypes.STRING,
 		price: DataTypes.NUMERIC,
 		image: DataTypes.STRING,

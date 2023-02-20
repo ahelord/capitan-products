@@ -24,7 +24,10 @@ class MagicStoreDatasource {
 				value: attribute.option,
 				displayName: `${attribute.name} ${attribute.option}`
 			})),
-			'price': variant.price
+			'price': variant.price === '' ? 0 : parseInt(variant.price),
+			'sku':variant.sku,
+			'image': variant.image.src,
+			'externalId':variant.id
 		};
 	}
 
@@ -55,6 +58,7 @@ class MagicStoreDatasource {
 				httpsAgent: agent
 			};
 			console.log('call variant');
+			await new Promise(resolve => setTimeout(resolve, 500));
 			const response = await axios(config);
 			const variant = this.adaptToVariant(response.data);
 			variants.push(variant);
@@ -64,7 +68,7 @@ class MagicStoreDatasource {
 
 	async searchProducts() {
 		let currentPage = 1;
-		let perPage = 1;
+		let perPage = 3;
 
 		const agent = new https.Agent({
 			rejectUnauthorized: false
@@ -85,6 +89,7 @@ class MagicStoreDatasource {
 		do {
 			console.log('call');
 			console.log('currentPage',currentPage);
+			await new Promise(resolve => setTimeout(resolve, 500));
 			response = await axios(config);
 			const productsAdapted = [];
 			for (const product of response.data) {
@@ -96,12 +101,7 @@ class MagicStoreDatasource {
 			console.log('header', parseInt(response.headers['x-wp-totalpages']));
 			console.log('currentPage', currentPage);
 
-		} while (parseInt(response.headers['x-wp-totalpages']) !== currentPage);/*{
-			currentPage += 1;
-			config.url = this.getEndpointUrl(perPage,currentPage)
-			response = await axios(config);
-			products = Array.join(response.data,products)
-		}*/
+		} while (parseInt(response.headers['x-wp-totalpages']) > currentPage-1);
 
 		return products;
 
