@@ -44,7 +44,6 @@ class HeavenStoreDatasource {
 			}
 		};
 		let response;
-		console.log('call heaven product image');
 		response = await axios(config);
 		return response.data;
 	}
@@ -59,8 +58,6 @@ class HeavenStoreDatasource {
 		};
 		let products = [];
 		let response;
-		
-		console.log('call heaven');
 		response = await axios(config);
 		for (const product of response.data.products) {
 			products.push(await this.adaptToProduct(product));

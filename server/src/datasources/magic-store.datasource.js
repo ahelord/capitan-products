@@ -57,7 +57,6 @@ class MagicStoreDatasource {
 				},
 				httpsAgent: agent
 			};
-			console.log('call variant');
 			await new Promise(resolve => setTimeout(resolve, 500));
 			const response = await axios(config);
 			const variant = this.adaptToVariant(response.data);
@@ -87,8 +86,6 @@ class MagicStoreDatasource {
 		let response;
 
 		do {
-			console.log('call');
-			console.log('currentPage',currentPage);
 			await new Promise(resolve => setTimeout(resolve, 500));
 			response = await axios(config);
 			const productsAdapted = [];
@@ -98,9 +95,6 @@ class MagicStoreDatasource {
 			products = productsAdapted.concat(products);
 			currentPage += 1;
 			config.url = this.getProductsEndpointUrl(perPage, currentPage);
-			console.log('header', parseInt(response.headers['x-wp-totalpages']));
-			console.log('currentPage', currentPage);
-
 		} while (parseInt(response.headers['x-wp-totalpages']) > currentPage-1);
 
 		return products;

@@ -61,7 +61,6 @@ class ProductsInteractor {
 			};
 		}
 
-
 		if (!priceFilter && !searchFilter) {
 			options = {
 				include: [
@@ -71,7 +70,6 @@ class ProductsInteractor {
 				]
 			};
 		}
-		console.log('where',JSON.stringify(options));
 		return await Product.findAll(options);
 	}
 
