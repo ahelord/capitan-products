@@ -3,10 +3,10 @@
 # Run Docker
 ./run-docker.sh
 
-# Run Local only node 12
+# Run Local only node 14
 - cd server
 - cd src
-- nvm use 12
+- nvm use 14
 - npm i
 - npm run nodemon
 
