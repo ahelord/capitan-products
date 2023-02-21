@@ -5,7 +5,7 @@ const storesController = new StoresController();
 const router = express.Router();
 
 router
-	.route('/')
+	.route('/:store')
 	.get(storesController.getSearch);
 
 module.exports = router;

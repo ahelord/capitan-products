@@ -11,7 +11,7 @@ class StoresController {
 	async getSearch(req, res, next) {
 		try{
 			const interactor = new StoreInteractor();
-			const response = await interactor.searchProducts();
+			const response = await interactor.searchProducts(req.params.store);
 			res.json(response);
 		}catch (error) {
 			console.error(error);
